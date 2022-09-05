@@ -102,7 +102,12 @@ from tkinter import Y
 # words = ["monke", "Python", "hi", "USA", "Bruce Willis", "water"]
 # print(listWordLongerN(words, 4))
 
-#board = []
+board = []
+for i in range(8):
+    row = [' ' for i in range(8)]
+    board.append(row)
+
+print(board)
 
 #STRINGS
 # a = input("Mata in sträng #1: ")
@@ -135,44 +140,44 @@ from tkinter import Y
 # namn_capitalized = capitalizeNames(namn)
 # print(f"After: {namn_capitalized}")
 
-text = "Detta är en sträng som du skall ändra"
-spaceCounter = 0
-for s in text:
-    if s == " ":
-        spaceCounter += 1
-text_space_replaced = text.replace(" ", "*")
+# text = "Detta är en sträng som du skall ändra"
+# spaceCounter = 0
+# for s in text:
+#     if s == " ":
+#         spaceCounter += 1
+# text_space_replaced = text.replace(" ", "*")
 
-print(f"Before: {text}")
-print(f"After: {text_space_replaced}")
-print(f"There were {spaceCounter} spaces replaced")
+# print(f"Before: {text}")
+# print(f"After: {text_space_replaced}")
+# print(f"There were {spaceCounter} spaces replaced")
 
-mail = input("Mata in en mailadress: ")
-def mailControl(input_mail):
-    length = len(input_mail)
-    a = False
-    b = False
-    atCounter = 0
-    dotCounter = 0
-    dotPosition = 0
-    dotBool = False
-    for x in input_mail:
-        if x == "@":
-            atCounter += 1
-            a = True
-        if x == ".":
-            dotCounter += 1
-            b = True
-    for x in input_mail:
-        dotPosition += 1
-        if x == ".":
-            break
-    if length - dotPosition == 2 or length - dotPosition == 3:
-        dotBool = True
-    print(f"Length = {length}")
-    print(f"dotPosition = {dotPosition}")
-    if a and b and atCounter == 1 and dotCounter >= 1 and dotBool:
-        return True
-    else:
-        return False
+# mail = input("Mata in en mailadress: ")
+# def mailControl(input_mail):
+#     length = len(input_mail)
+#     a = False
+#     b = False
+#     atCounter = 0
+#     dotCounter = 0
+#     dotPosition = 0
+#     dotBool = False
+#     for x in input_mail:
+#         if x == "@":
+#             atCounter += 1
+#             a = True
+#         if x == ".":
+#             dotCounter += 1
+#             b = True
+#     for x in input_mail:
+#         dotPosition += 1
+#         if x == ".":
+#             break
+#     if length - dotPosition == 2 or length - dotPosition == 3:
+#         dotBool = True
+#     print(f"Length = {length}")
+#     print(f"dotPosition = {dotPosition}")
+#     if a and b and atCounter == 1 and dotCounter >= 1 and dotBool:
+#         return True
+#     else:
+#         return False
 
-print(mailControl(mail))
+# print(mailControl(mail))
