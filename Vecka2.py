@@ -52,44 +52,63 @@ from tkinter import Y
 #         break
 
 #LISTS
-numbers = []
-numbers.append(int(input("Mata in tal#1: ")))
-numbers.append(int(input("Mata in tal#2: ")))
-numbers.append(int(input("Mata in tal#3: ")))
-numbers.append(int(input("Mata in tal#4: ")))
-print(numbers)
-numbers.sort()
-print(f"Största numret är {numbers[-1]}") #list[-1] is SUPER USEFUL!!
+# numbers = []
+# numbers.append(int(input("Mata in tal#1: ")))
+# numbers.append(int(input("Mata in tal#2: ")))
+# numbers.append(int(input("Mata in tal#3: ")))
+# numbers.append(int(input("Mata in tal#4: ")))
+# print(numbers)
+# numbers.sort()
+# print(f"Största numret är {numbers[-1]}") #list[-1] is SUPER USEFUL!!
 
-def listSum(list):
-    sum = 0
-    for x in list:
-        sum += x
-    return sum
+# def listSum(list):
+#     sum = 0
+#     for x in list:
+#         sum += x
+#     return sum
 
-print(f"Summan av alla tal är {listSum(numbers)}")
+# print(f"Summan av alla tal är {listSum(numbers)}")
 
-def listLargest(list): #I will most probably use this in the future
-    list.sort()
-    return list[-1]
+# def listLargest(list): #I will most probably use this in the future
+#     list.sort()
+#     return list[-1]
 
-def listLen2(list):
+# def listLen2(list):
+#     counter = 0
+#     for x in range(len(list)):
+#         if len(list[x]) >= 2 and list[x][0] != list[x][-1]: #REMEMBER THIS!!!
+#             counter += 1
+#     return counter
+
+# sample = ['abc', 'xyz', 'aba', '1221']
+# print(listLen2(sample))
+
+# def listRemoveDup(inputlist):
+#     return list(dict.fromkeys(inputlist)) #Finns supersmidigt från w3schools
+
+# chars = ["a", "b", "a", "c", "c"]
+# print(f"Before: {chars}")
+# chars_update = listRemoveDup(chars)
+# print(f"After: {chars_update}")
+
+# def listWordLongerN(list, n):
+#     wordsLonger = []
+#     for x in list:
+#         if len(x) > n:
+#             wordsLonger.append(x)
+#     return wordsLonger
+
+# words = ["monke", "Python", "hi", "USA", "Bruce Willis", "water"]
+# print(listWordLongerN(words, 4))
+
+board = []
+
+#STRINGS
+# a = input("Mata in sträng #1: ")
+# b = input("Mata in sträng #2: ")
+# c = input("Mata in sträng #3: ")
+# print(a+b+c)
+
+hello = "Hello, world"
+for x in hello:
     counter = 0
-    for x in range(len(list)):
-        if len(list[x]) >= 2 and list[x][0] != list[x][-1]: #REMEMBER THIS!!!
-            counter += 1
-    return counter
-
-sample = ['abc', 'xyz', 'aba', '1221']
-print(listLen2(sample))
-
-def listRemoveDup(inputlist):
-    return list(dict.fromkeys(inputlist)) #Finns supersmidigt från w3schools
-
-chars = ["a", "b", "a", "c", "c"]
-print(f"Before: {chars}")
-chars_update = listRemoveDup(chars)
-print(f"After: {chars_update}")
-
-def listWordLongerN(list, n):
-    
