@@ -11,34 +11,33 @@
 # print(f"For 2 in d: {dictKeyCheck(d,2)}")
 # print(f"For 4 in d: {dictKeyCheck(d,4)}")
 
-def dictPrintUnique(dict):
-    dictValues = dict.values()
-    dictValuesNoDuplicates = list(dict.fromkeys(dictValues)) #remove duplicates
-    return dictValuesNoDuplicates
+# def dictPrintUnique(dict):
+#     dictValues = dict.values()
+#     dictValuesNoDuplicates = list(dict.fromkeys(dictValues)) #remove duplicates
+#     return dictValuesNoDuplicates
 
-s =  {"V":"S001", "V":"S002", "VI":"S001", "VI":"S005", "VII":"S005", "V":"S009", "VIII":"S007"}
-print(f"Unique values: {dictPrintUnique(s)}")
+# s =  {"V":"S001", "V":"S002", "VI":"S001", "VI":"S005", "VII":"S005", "V":"S009", "VIII":"S007"}
+# print(f"Unique values: {dictPrintUnique(s)}")
 
-def dictFromString(string):
-    listString = list(string)
-    listDict = dict.fromkeys(listString, 0)
-    for letter in listString:
-        listDict[letter] += 1
-    return listDict
+# def dictFromString(string):
+#     listString = list(string)
+#     listDict = dict.fromkeys(listString, 0)
+#     for letter in listString:
+#         listDict[letter] += 1
+#     return listDict
 
-print(dictFromString('w3resource')) #Key order is different in Python 3.8
+# print(dictFromString('w3resource')) #Key order is different in Python 3.8
 
 def dictGetTopThree(dict):
-    #find just the largest
+    keys = []
     values = []
-    for value in dict:
-        values.append(dict[value])
-    values.sort()
+    for key in dict:
+        keys.append(key)
+        values.append(dict[key])
+    print(keys)
     print(values)
-    largest = values[-1]
-    print(largest)
-    print(list(dict.keys())[list(dict.values()).index(largest)])
-    return dict
+    indexLargest = 0
+
 
 sample = {'item1': 45.50, 'item2':35, 'item3': 41.30, 'item4':55, 'item5': 24}
 print(f"Top three items in shop: {dictGetTopThree(sample)}")
@@ -50,6 +49,7 @@ print(f"Top three items in shop: {dictGetTopThree(sample)}")
 #     namn = namnNummer.split()[0]
 #     nummer = namnNummer.split()[1]
 #     telefonregister[namn] = nummer
+#     #Alternative solution is to find the index of the space and take everything before it to name and everything after to nummer
 
 # print(telefonregister)
 
