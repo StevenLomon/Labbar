@@ -1,46 +1,70 @@
 #YH Grundläggande Python Vecka 3 labbar
 
 #DICTIONARIES
-# def dictKeyCheck(dict, key):
+
+#print("\nCHECK IF KEY IS PRESENT IN DICT")
+# def isPresentKey(dict, key):
 #     if key in dict:
-#         return "Key is present in the dictionary"
+#         return True
 #     else:
-#         return "Key is not present in the dictionary"
+#         return False
 
-# d = {1: 15, 2: 18, 3: 22}
-# print(f"For 2 in d: {dictKeyCheck(d,2)}")
-# print(f"For 4 in d: {dictKeyCheck(d,4)}")
+# d = {1: 15, 6: 18, 9: 22}
+# print(f"d = {d}")
+# keyCheck = int(input("Enter a key to be checked: "))
+# if isPresentKey(d,keyCheck):
+#     print(f"For {keyCheck} in d: Key is present in the dictionary")
+# else:
+#     print(f"For {keyCheck} in d: Key is not present in the dictionary")
 
-# def dictPrintUnique(dict):
-#     dictValues = dict.values()
-#     dictValuesNoDuplicates = list(dict.fromkeys(dictValues)) #remove duplicates
-#     return dictValuesNoDuplicates
+# print("\nGET UNIQUE VALUES FROM A DICT")
+# def dictUniqueValues(dict):
+#     uniqueVal = {}
+#     for val in dict.values():
+#         if not val in uniqueVal:
+#             uniqueVal[val] = 1
+#     return uniqueVal
 
 # s =  {"V":"S001", "V":"S002", "VI":"S001", "VI":"S005", "VII":"S005", "V":"S009", "VIII":"S007"}
-# print(f"Unique values: {dictPrintUnique(s)}")
+# print(f"Unique values in s = {s}:")
+# for key in dictUniqueValues(s).keys():
+#     print(key)
 
-# def dictFromString(string):
-#     listString = list(string)
-#     listDict = dict.fromkeys(listString, 0)
-#     for letter in listString:
-#         listDict[letter] += 1
-#     return listDict
+print("\nCOUNT LETTER OCCURENCE IN A STRING")
+def stringCountLetters(string):
+    letters = {} #maps letter to amount of times in string: letter - amount
+    for letter in string.lower():
+        if not letter in letters:
+            letters[letter] = 1
+        else:
+            letters[letter] += 1
+    return letters
 
-# print(dictFromString('w3resource')) #Key order is different in Python 3.8
+theString = 'Steven Lomon Lennartsson'
+print(f"String to count letter occurence: {theString}")
+print(f"Result: {stringCountLetters(theString)}")
 
+
+print("\nGET TOP THREE ITEMS FROM A DICT")
 def dictGetTopThree(dict):
-    keys = []
-    values = []
-    for key in dict:
-        keys.append(key)
-        values.append(dict[key])
-    print(keys)
-    print(values)
-    indexLargest = 0
-
+    itemShopCopy = dict.copy() #Copy the original dict since we will be removing
+    theTopThree = {}
+    largestSoFar = 0
+    currentKey = ''
+    while len(theTopThree) < 3:
+        for key in itemShopCopy.keys(): #find the largest in the dict
+            if itemShopCopy[key] > largestSoFar:
+                largestSoFar = itemShopCopy[key]
+                currentKey = key
+        theTopThree[currentKey] = largestSoFar #"Transfer" the item
+        largestSoFar = 0 #Reset largestSoFar
+        itemShopCopy.pop(currentKey) #Delete from the copy dict
+    return theTopThree
 
 sample = {'item1': 45.50, 'item2':35, 'item3': 41.30, 'item4':55, 'item5': 24}
+print(f"Our item shop: {sample}")
 print(f"Top three items in shop: {dictGetTopThree(sample)}")
+print(f"Our item shop: {sample}")
 
 #LECTURE
 # telefonregister = {}
