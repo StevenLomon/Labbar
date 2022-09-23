@@ -86,33 +86,98 @@
 # decimal = input("Skriv in ett decimaltal mellan 0 och 1: ")
 # print(f"I decimalform: {ToPercentage(decimal)}")
 
-print("\n*KOLLA VOKAL")
-def isVowel(input):
-    input = input.lower()
-    if input == 'a' or input == 'e' or input == 'i' or input == 'o' or input == 'u' or input == 'y' or input == 'å' or input == 'ä' or input == 'ö':
-        return True
-    else:
-        return False
+# print("\n*KOLLA VOKAL")
+# def isVowel(input):
+#     input = input.lower()
+#     if input == 'a' or input == 'e' or input == 'i' or input == 'o' or input == 'u' or input == 'y' or input == 'å' or input == 'ä' or input == 'ö':
+#         return True
+#     else:
+#         return False
 
-maybeVowel = input("Mata in en bokstav: ")
-if isVowel(maybeVowel):
-    print(f"{maybeVowel} är en vokal!")
-else:
-    print(f"{maybeVowel} är ej en vokal")
+# maybeVowel = input("Mata in en bokstav: ")
+# if isVowel(maybeVowel):
+#     print(f"{maybeVowel} är en vokal!")
+# else:
+#     print(f"{maybeVowel} är ej en vokal")
 
-print("\n*RÖVARSPRÅK!")
-def Translate(inputText):
-    rövartext = ""
-    for letter in inputText:
-        if not isVowel(letter) and letter != ' ':
-            rövartext = rövartext + letter + "o" + letter.lower()
-        else:
-            rövartext = rövartext + letter
-    return rövartext
+# print("\n*RÖVARSPRÅK!")
+# def Translate(inputText):
+#     rövartext = ""
+#     for letter in inputText:
+#         if not isVowel(letter) and letter != ' ':
+#             rövartext = rövartext + letter + "o" + letter.lower()
+#         else:
+#             rövartext = rövartext + letter
+#     return rövartext
 
-text = input("Skriv in en mening: ")
-print(f"Din mening i Rövarspråk: {Translate(text)}")
+# text = input("Skriv in en mening: ")
+# print(f"Din mening i Rövarspråk: {Translate(text)}")
 
+#FILES
+
+print("\nPRINT ODD LINES IN A FILE")
+def printOddLines(txtFile):
+    oddLine = True
+    with open(txtFile, "r") as f: 
+        for line in f:
+            if oddLine:
+                print(line.replace("\n", ""))
+            oddLine = not oddLine
+
+def countLines(txtFile):
+    counter = 0
+    with open (txtFile, "r") as f:
+        for line in f:
+            counter += 1
+    return counter
+
+print(f"Our text file text.txt has {countLines('text.txt')} lines. Printing odd ones:")
+printOddLines("text.txt")
+
+print("\nMERGE TWO FILES INTO A THIRD FILE")
+def mergeTwoFiles(txt1, txt2, txtresult):
+    #if txtresult:
+    #    del txtresult
+    #No need to do this since we used write mode. It overwwrites anything that is already in
+    #the result file. If we want to add something in a file we use append mode
+    
+    with open (txtresult, "w") as resultFile:
+        with open (txt1, "r") as f1:
+            for line in f1:
+                resultFile.write(line.replace("\n", "") + "\n")
+        with open (txt2, "r") as f2:
+            for line in f2:
+                resultFile.write(line.replace("\n", "") + "\n")
+
+print(f"Merging txt1.txt and txt2.txt into txtResult.txt...")
+mergeTwoFiles("txt1.txt", "txt2.txt", "txtResult.txt")
+
+print("\nINSERT LINE NUMBERS INTO NEW FILE")
+def insertLineNumbers(txtFile, txtresult):
+    counter = 1
+    with open(txtresult, "w") as resultFile:
+        with open(txtFile, "r") as f:
+            for line in f:
+                resultFile.write(str(counter) + " " + line.replace("\n", "") + "\n")
+                counter += 1
+
+print("Taking text.txt, inserting line numbers and putting result into txtResult.txt...")
+insertLineNumbers("text.txt", "txtResult.txt")
+
+print("\nSORT A LIST OF 800 BIRDS")
+def sortNames(txtNames, txtSorted):
+    names = []
+    with open(txtSorted, "w") as resultFile:
+        with open(txtNames, "r") as f:
+            for line in f:
+                names.append(line.replace("\n", "").capitalize())
+        #names = sorted(names)
+        names.sort() #what would be the difference?
+        for index in range(0, len(names)):
+            resultFile.write(names[index] + "\n")
+
+print("Sorting bird text document and putting result in sortedBirds.txt...")
+sortNames("Lab5TextFile-InData1.txt", "birdsSorted.txt")
 
 #LECTURE
 def GetIntMenuInput(prompt, minValue, maxValue): #Use in Bankomat!
@@ -139,13 +204,13 @@ def GetIntMenuInput(prompt, minValue, maxValue): #Use in Bankomat!
 
 #FILES DEMO
 #Read mode
-with open("spelare.txt", "r") as f: #r for read, f is an optional name
-    for line in f:
-        #lista.append(line.replace("\n",""))
-        pass
+# with open("spelare.txt", "r") as f: #r for read, f is an optional name
+#     for line in f:
+#         #lista.append(line.replace("\n",""))
+#         pass
 
-#Write mode
-with open('spelare.txt', "w") as f:
-    #for namn in lista:
-    #    f.write(namn + "\n")
-    pass
+# #Write mode
+# with open('spelare.txt', "w") as f:
+#     #for namn in lista:
+#     #    f.write(namn + "\n")
+#     pass
