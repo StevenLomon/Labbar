@@ -115,54 +115,54 @@
 
 #FILES
 
-print("\nPRINT ODD LINES IN A FILE")
-def printOddLines(txtFile):
-    oddLine = True
-    with open(txtFile, "r") as f: 
-        for line in f:
-            if oddLine:
-                print(line.replace("\n", ""))
-            oddLine = not oddLine
+# print("\nPRINT ODD LINES IN A FILE")
+# def printOddLines(txtFile):
+#     oddLine = True
+#     with open(txtFile, "r") as f: 
+#         for line in f:
+#             if oddLine:
+#                 print(line.replace("\n", ""))
+#             oddLine = not oddLine
 
-def countLines(txtFile):
-    counter = 0
-    with open (txtFile, "r") as f:
-        for line in f:
-            counter += 1
-    return counter
+# def countLines(txtFile):
+#     counter = 0
+#     with open (txtFile, "r") as f:
+#         for line in f:
+#             counter += 1
+#     return counter
 
-print(f"Our text file text.txt has {countLines('text.txt')} lines. Printing odd ones:")
-printOddLines("text.txt")
+# print(f"Our text file text.txt has {countLines('text.txt')} lines. Printing odd ones:")
+# printOddLines("text.txt")
 
-print("\nMERGE TWO FILES INTO A THIRD FILE")
-def mergeTwoFiles(txt1, txt2, txtresult):
-    #if txtresult:
-    #    del txtresult
-    #No need to do this since we used write mode. It overwwrites anything that is already in
-    #the result file. If we want to add something in a file we use append mode
+# print("\nMERGE TWO FILES INTO A THIRD FILE")
+# def mergeTwoFiles(txt1, txt2, txtresult):
+#     #if txtresult:
+#     #    del txtresult
+#     #No need to do this since we used write mode. It overwrites anything that is already in
+#     #the result file. If we want to add something in a file we use append mode
     
-    with open (txtresult, "w") as resultFile:
-        with open (txt1, "r") as f1:
-            for line in f1:
-                resultFile.write(line.replace("\n", "") + "\n")
-        with open (txt2, "r") as f2:
-            for line in f2:
-                resultFile.write(line.replace("\n", "") + "\n")
+#     with open (txtresult, "w") as resultFile:
+#         with open (txt1, "r") as f1:
+#             for line in f1:
+#                 resultFile.write(line.replace("\n", "") + "\n")
+#         with open (txt2, "r") as f2:
+#             for line in f2:
+#                 resultFile.write(line.replace("\n", "") + "\n")
 
-print(f"Merging txt1.txt and txt2.txt into txtResult.txt...")
-mergeTwoFiles("txt1.txt", "txt2.txt", "txtResult.txt")
+# print(f"Merging txt1.txt and txt2.txt into txtResult.txt...")
+# mergeTwoFiles("txt1.txt", "txt2.txt", "txtResult.txt")
 
-print("\nINSERT LINE NUMBERS INTO NEW FILE")
-def insertLineNumbers(txtFile, txtresult):
-    counter = 1
-    with open(txtresult, "w") as resultFile:
-        with open(txtFile, "r") as f:
-            for line in f:
-                resultFile.write(str(counter) + " " + line.replace("\n", "") + "\n")
-                counter += 1
+# print("\nINSERT LINE NUMBERS INTO NEW FILE")
+# def insertLineNumbers(txtFile, txtresult):
+#     counter = 1
+#     with open(txtresult, "w") as resultFile:
+#         with open(txtFile, "r") as f:
+#             for line in f:
+#                 resultFile.write(str(counter) + " " + line.replace("\n", "") + "\n")
+#                 counter += 1
 
-print("Taking text.txt, inserting line numbers and putting result into txtResult.txt...")
-insertLineNumbers("text.txt", "txtResult.txt")
+# print("Taking text.txt, inserting line numbers and putting result into txtResult.txt...")
+# insertLineNumbers("text.txt", "txtResult.txt")
 
 print("\nSORT A LIST OF 800 BIRDS")
 def sortNames(txtNames, txtSorted):
@@ -171,13 +171,107 @@ def sortNames(txtNames, txtSorted):
         with open(txtNames, "r") as f:
             for line in f:
                 names.append(line.replace("\n", "").capitalize())
-        #names = sorted(names)
-        names.sort() #what would be the difference?
+        #names = sorted(names) #Puts the result in a new list
+        names.sort() 
         for index in range(0, len(names)):
             resultFile.write(names[index] + "\n")
 
 print("Sorting bird text document and putting result in sortedBirds.txt...")
 sortNames("Lab5TextFile-InData1.txt", "birdsSorted.txt")
+
+print("\nMENU WITH USERNAMES AND PASSWORDS")
+def printMenu():
+    print("a. Login")
+    print("b. Registrera nytt konto")
+    print("c. Avsluta")
+
+def getMenuInput(prompt: str) -> str:
+    while True:
+        try:
+            sel = input(prompt)
+            if sel != 'a' and sel != 'b' and sel != 'c':
+                print("Skriv in a, b eller c, tack")
+            else:
+                break
+        except:
+            print("Skriv in en bokstav, tack")
+    return sel
+
+#str = 'Västerås'
+#print(str.find('g'))
+# if user.find(',') != -1: #If user contains ','
+# print("Username cannot contain ','")
+from dataclasses import dataclass
+import jsonpickle
+
+@dataclass
+class Account:
+    Username: str
+    Password: str
+
+def createAccount(allAccounts: str, accountsList: list[Account]):
+    while True:
+        try:
+            taken = False
+            user = input("Skriv in username: ")
+            for i in range(0, len(accountsList)):
+                if accountsList[i].Username == user:
+                    taken = True
+            if len(user) < 2 or len(user) > 20:
+                print("Please write a username within 2 and 20 characters")
+            elif taken:
+                print("Username already taken")
+            else:
+                break
+        except:
+            print("Ogiltig input. Försök igen")
+    while True:
+        try:
+            pw = input("Skriv in lösenord: ")
+            if len(pw) < 4 or len(pw) > 20:
+                print("Please write a username within 4 and 20 characters")
+            else:
+                break
+        except:
+            print("Ogiltig input. Försök igen")
+    
+    acc = Account(user, pw)
+    return acc
+
+def login(allAccounts: str, accountsList: list[Account]) -> bool:
+    foundUser = False
+    foundPw = False
+    user = input("Skriv in username: ")
+    pw = input("Skriv in lösenord: ")
+    for i in range(0, len(accountsList)):
+        if accountsList[i].Username == user:
+            foundUser = True
+        if accountsList[i].Password == pw:
+            foundPw = True
+    if foundUser == True and foundPw == True:
+        return True
+    return False
+
+accounts = "allAccounts.txt"
+accountsList = []
+with open(accounts, "r") as f:
+    accountsList = jsonpickle.decode(f.read())
+print(accountsList)
+
+while True:
+    printMenu()
+    val = getMenuInput("Val: ")
+    if val == 'a':  
+        if(login(accounts, accountsList)):
+            print("Login successful!")
+        else:
+            print("Wrong username or password. Try again")
+    elif val == 'b':
+        accountsList.append(createAccount(accounts, accountsList))
+        with open(accounts, "w") as f:
+            f.write(jsonpickle.encode(accountsList))
+    elif val == 'c':
+        break
 
 #LECTURE
 def GetIntMenuInput(prompt, minValue, maxValue): #Use in Bankomat!
@@ -214,3 +308,112 @@ def GetIntMenuInput(prompt, minValue, maxValue): #Use in Bankomat!
 #     #for namn in lista:
 #     #    f.write(namn + "\n")
 #     pass
+
+#INTRO TO OBJECT ORIENTATION
+#Spelare ska ha namn, JerseyNr och Team name
+from dataclasses import dataclass
+
+import jsonpickle
+
+@dataclass
+class Player:
+    Namn: str
+    JerseyNumber: int
+    Teamname: str
+
+# p2 = Player("Mats Sundin", 13, "Toronto")
+# p2.Teamname
+# l = []
+# l.append(p1)
+# .Teamname = "Tre Kronor"
+# print(p1.Namn)
+# print(p2.Namn)
+
+
+def GetIntMenuInput(prompt, minValue, maxValue):
+    while True:
+        try:
+            sel = int(input(prompt))
+            if sel < minValue or sel > maxValue:
+                print(f"Mata in ett tal mellan {minValue} och {maxValue} tack")
+            else:
+                break
+        except:
+            print("Mata in ett tal tack")
+    return sel
+
+def CreatePlayer(): # black box - kommer ut ut den så ska vi ha en ny player (namn - string)
+    namn = input("Ange namn:")
+    team = input("Ange lag:")
+    jersey = int(input("Ange jersey:"))
+    player = Player(namn,jersey,team) 
+    return player
+    
+def ListPlayers(listOfPlayers): 
+    for player in listOfPlayers:
+        print(f"{player.JerseyNumber} {player.Namn} {player.Teamname}")
+
+def DeletePlayer(listOfPlayer):
+    index = 1
+    for playerName in listOfPlayer:
+        print(f"{index} {playerName}")
+        index = index + 1
+    sel = GetIntMenuInput("Ange spelare att ta bort:",1, len(listOfPlayer))
+    del listOfPlayer[sel-1]
+
+def ChangePlayer(listOfPlayer):
+    while True:
+        print(" *** PLAYER MENU *** ")
+        print("1. Ändra namn")
+        print("2. Ändra jersey")
+        print("3. Tillbaka till huvudmenyn")
+        sel = GetIntMenuInput("Ange val:", 1, 3)
+        if sel == 1:
+            index = 1
+            for playerName in listOfPlayer:
+                print(f"{index} {playerName}")
+                index = index + 1
+            sel = GetIntMenuInput("Ange spelare att ändra namn på:",1, len(listOfPlayer))
+
+            namn = input("Ange nytt namn")
+            listOfPlayer[sel-1] = namn
+        elif sel == 2:
+            print("To be implemented")
+        elif sel == 3:
+            return          
+
+def MenuPrint():
+    print("1. Skapa spelare")
+    print("2. Lista spelare")
+    print("3. Ändra spelare")
+    print("4. Ta bort spelare")
+    print("5. Avsluta")
+# ibland så returnerar INTE en funktion nånting
+
+def AddTwoNumbers(tal1:int, tal2:int) -> int:
+    return tal1 + tal2
+
+with open("spelare-objekt.txt", "r") as filen:
+    lista = jsonpickle.decode(filen.read())
+
+def HuvudMenyInput(lista):        
+    while True:
+        MenuPrint()
+        sel = GetIntMenuInput("Ange val:", 1, 5)
+        if sel == 1:
+            player = CreatePlayer()
+            lista.append(player)
+        if sel == 2:
+            ListPlayers(lista)
+        if sel == 4:
+            DeletePlayer(lista)
+        if sel == 3:
+            ChangePlayer(lista)
+        if sel == 5:
+            break
+
+lista = []
+HuvudMenyInput(lista)
+
+with open("spelare-objekt.txt", "w") as f:
+    f.write(jsonpickle.encode(lista))
