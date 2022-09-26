@@ -1,7 +1,9 @@
 #YH Grundläggande Python Vecka 5 labbar
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
+from dataclasses import dataclass
 
+#***DATETIME***
 def getWeekdayName(weekdaynum:int) -> str:
     if weekdaynum == 0:
         return "Monday"
@@ -41,18 +43,18 @@ def getDate(prompt = "Enter a date on the format yyyy-mm-dd, or 'today' for toda
             print("Invalid input")
     return convertToDatetime(date)
 
-print("\n**PRINT DATE IN TWO FORMATS**")
-nu = datetime.now()
-print(f"Complete Date: {nu.strftime('%Y-%m-%d %H:%M:%S')}")
-print(f"Short Date: {nu.strftime('%Y-%m-%d')}")
+# print("\n**PRINT DATE IN TWO FORMATS**")
+# nu = datetime.now()
+# print(f"Complete Date: {nu.strftime('%Y-%m-%d %H:%M:%S')}")
+# print(f"Short Date: {nu.strftime('%Y-%m-%d')}")
 
-print("\n**PARTS OF DATETIME**")
-nu = datetime.now()
-print(f"Year = {nu.year}")
-print(f"Month = {nu.month}")
-print("...")
-print(f"Second = {nu.second}")
-print(f"Millisecond = {nu.microsecond}")
+# print("\n**PARTS OF DATETIME**")
+# nu = datetime.now()
+# print(f"Year = {nu.year}")
+# print(f"Month = {nu.month}")
+# print("...")
+# print(f"Second = {nu.second}")
+# print(f"Millisecond = {nu.microsecond}")
 
 # print("\n**DAY OF THE WEEK FROM A DATE**")
 # year = int(input("Enter a year: "))
@@ -79,14 +81,54 @@ print(f"Millisecond = {nu.microsecond}")
 # diff = abs(date1 - date2)
 # print(f"Difference in days: {diff.days}")
 
-print("\n**NUMBER OF DAYS IN A MONTH**")
-year = int(input("Enter year: "))
-month = int(input("Enter month: "))
-date = datetime(year, month, 1)
-newDate = date + relativedelta(months=+1) + timedelta(days=-1)
-print(f"Month {month} year {year} conains {newDate.day} days")
+# print("\n**NUMBER OF DAYS IN A MONTH**")
+# year = int(input("Enter year: "))
+# month = int(input("Enter month: "))
+# date = datetime(year, month, 1)
+# newDate = date + relativedelta(months=+1) + timedelta(days=-1)
+# print(f"Month {month} year {year} conains {newDate.day} days")
 
-#LECTURE
+#***OOB CLASSES***
+@dataclass
+class Dish:
+    Name: str
+    Price: float
+    Type: str
+    Calories: float
+
+dishList = []
+for i in range(0,3):
+    print(f"Dish #{i+1}:")
+    name = input("Enter a name: ").capitalize()
+    price = float(input("Enter a price: "))
+    type = input("Enter a type: ").capitalize()
+    cal = float(input("Enter amount of calories: "))
+    d = Dish(name, price, type, cal)
+    dishList.append(d)
+
+print("***TODAY'S MENU***")
+print(f"Starter: The {dishList[0].Type} {dishList[0].Name} costing ${dishList[0].Price} and consisting of {dishList[0].Calories} calories")
+print(f"Main course: The {dishList[1].Type} {dishList[1].Name} costing ${dishList[1].Price} and consisting of {dishList[1].Calories} calories")
+print(f"Desert: The {dishList[2].Type} {dishList[2].Name} costing ${dishList[2].Price} and consisting of {dishList[2].Calories} calories")
+
+@dataclass
+class Person:
+    BirthDate: datetime
+    Name: str
+    StreetAddress: str
+    ZIPCode: str
+    City: str
+
+
+
+#***POINT***
+from point import Point
+
+myPoint = Point( 1.5, 2.5 )
+print( myPoint.x )
+print( myPoint.y )
+
+#***LECTURE***
 # fakturaDatum = datetime.now()
 # forfallodag = fakturaDatum + timedelta(days=30)
 # if forfallodag.weekday() == 5:
