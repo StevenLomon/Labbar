@@ -179,241 +179,301 @@ def sortNames(txtNames, txtSorted):
 print("Sorting bird text document and putting result in sortedBirds.txt...")
 sortNames("Lab5TextFile-InData1.txt", "birdsSorted.txt")
 
-print("\nMENU WITH USERNAMES AND PASSWORDS")
-def printMenu():
-    print("a. Login")
-    print("b. Registrera nytt konto")
-    print("c. Avsluta")
+# print("\nMENU WITH USERNAMES AND PASSWORDS")
+# def printMenu():
+#     print("a. Login")
+#     print("b. Registrera nytt konto")
+#     print("c. Avsluta")
 
-def getMenuInput(prompt: str) -> str:
-    while True:
-        try:
-            sel = input(prompt)
-            if sel != 'a' and sel != 'b' and sel != 'c':
-                print("Skriv in a, b eller c, tack")
-            else:
-                break
-        except:
-            print("Skriv in en bokstav, tack")
-    return sel
+# def getMenuInput(prompt: str) -> str:
+#     while True:
+#         try:
+#             sel = input(prompt)
+#             if sel != 'a' and sel != 'b' and sel != 'c':
+#                 print("Skriv in a, b eller c, tack")
+#             else:
+#                 break
+#         except:
+#             print("Skriv in en bokstav, tack")
+#     return sel
 
-#str = 'Västerås'
-#print(str.find('g'))
-# if user.find(',') != -1: #If user contains ','
-# print("Username cannot contain ','")
-from dataclasses import dataclass
-import jsonpickle
+# #str = 'Västerås'
+# #print(str.find('g'))
+# # if user.find(',') != -1: #If user contains ','
+# # print("Username cannot contain ','")
+# from dataclasses import dataclass
+# import jsonpickle
 
-@dataclass
-class Account:
-    Username: str
-    Password: str
+# @dataclass
+# class Account:
+#     Username: str
+#     Password: str
 
-def createAccount(allAccounts: str, accountsList: list[Account]):
-    while True:
-        try:
-            taken = False
-            user = input("Skriv in username: ")
-            for i in range(0, len(accountsList)):
-                if accountsList[i].Username == user:
-                    taken = True
-            if len(user) < 2 or len(user) > 20:
-                print("Please write a username within 2 and 20 characters")
-            elif taken:
-                print("Username already taken")
-            else:
-                break
-        except:
-            print("Ogiltig input. Försök igen")
-    while True:
-        try:
-            pw = input("Skriv in lösenord: ")
-            if len(pw) < 4 or len(pw) > 20:
-                print("Please write a username within 4 and 20 characters")
-            else:
-                break
-        except:
-            print("Ogiltig input. Försök igen")
+# def createAccount(allAccounts: str, accountsList: list[Account]):
+#     while True:
+#         try:
+#             taken = False
+#             user = input("Skriv in username: ")
+#             for i in range(0, len(accountsList)):
+#                 if accountsList[i].Username == user:
+#                     taken = True
+#             if len(user) < 2 or len(user) > 20:
+#                 print("Please write a username within 2 and 20 characters")
+#             elif taken:
+#                 print("Username already taken")
+#             else:
+#                 break
+#         except:
+#             print("Ogiltig input. Försök igen")
+#     while True:
+#         try:
+#             pw = input("Skriv in lösenord: ")
+#             if len(pw) < 4 or len(pw) > 20:
+#                 print("Please write a username within 4 and 20 characters")
+#             else:
+#                 break
+#         except:
+#             print("Ogiltig input. Försök igen")
     
-    acc = Account(user, pw)
-    return acc
+#     acc = Account(user, pw)
+#     return acc
 
-def login(allAccounts: str, accountsList: list[Account]) -> bool:
-    foundUser = False
-    foundPw = False
-    user = input("Skriv in username: ")
-    pw = input("Skriv in lösenord: ")
-    for i in range(0, len(accountsList)):
-        if accountsList[i].Username == user:
-            foundUser = True
-        if accountsList[i].Password == pw:
-            foundPw = True
-    if foundUser == True and foundPw == True:
-        return True
-    return False
+# def login(allAccounts: str, accountsList: list[Account]) -> bool:
+#     foundUser = False
+#     foundPw = False
+#     user = input("Skriv in username: ")
+#     pw = input("Skriv in lösenord: ")
+#     for i in range(0, len(accountsList)):
+#         if accountsList[i].Username == user:
+#             foundUser = True
+#         if accountsList[i].Password == pw:
+#             foundPw = True
+#     if foundUser == True and foundPw == True:
+#         return True
+#     return False
 
-accounts = "allAccounts.txt"
-accountsList = []
-with open(accounts, "r") as f:
-    accountsList = jsonpickle.decode(f.read())
-print(accountsList)
+# accounts = "allAccounts.txt"
+# accountsList = []
+# with open(accounts, "r") as f:
+#     accountsList = jsonpickle.decode(f.read())
+# print(accountsList)
 
-while True:
-    printMenu()
-    val = getMenuInput("Val: ")
-    if val == 'a':  
-        if(login(accounts, accountsList)):
-            print("Login successful!")
-        else:
-            print("Wrong username or password. Try again")
-    elif val == 'b':
-        accountsList.append(createAccount(accounts, accountsList))
-        with open(accounts, "w") as f:
-            f.write(jsonpickle.encode(accountsList))
-    elif val == 'c':
-        break
+# while True:
+#     printMenu()
+#     val = getMenuInput("Val: ")
+#     if val == 'a':  
+#         if(login(accounts, accountsList)):
+#             print("Login successful!")
+#         else:
+#             print("Wrong username or password. Try again")
+#     elif val == 'b':
+#         accountsList.append(createAccount(accounts, accountsList))
+#         with open(accounts, "w") as f:
+#             f.write(jsonpickle.encode(accountsList))
+#     elif val == 'c':
+#         break
 
 #LECTURE
-def GetIntMenuInput(prompt, minValue, maxValue): #Use in Bankomat!
-    while True:
-        try: #Don't question this for now
-            sel = int(input(prompt))
-            if sel < minValue or sel > maxValue:
-                print(f"Mata in ett tal mellan {minValue} och {maxValue} tack") #Putting this in a while True works even
-                #better than my if while loop
-            else:
-                break
-        except: #"Don't go to exception and crash, do this instead" "Custom exception"
-            print(f"Mata in ett tal, tack")
-    return sel
+# def GetIntMenuInput(prompt, minValue, maxValue): #Use in Bankomat!
+#     while True:
+#         try: #Don't question this for now
+#             sel = int(input(prompt))
+#             if sel < minValue or sel > maxValue:
+#                 print(f"Mata in ett tal mellan {minValue} och {maxValue} tack") #Putting this in a while True works even
+#                 #better than my if while loop
+#             else:
+#                 break
+#         except: #"Don't go to exception and crash, do this instead" "Custom exception"
+#             print(f"Mata in ett tal, tack")
+#     return sel
 
-#STACK/HEAP DEMO
-# def addTo(x):
-#     x = x + 1
-#     print(x)
+# #STACK/HEAP DEMO
+# # def addTo(x):
+# #     x = x + 1
+# #     print(x)
 
-# x = 12
-# addTo(x)
-# print(x)
+# # x = 12
+# # addTo(x)
+# # print(x)
 
-#FILES DEMO
-#Read mode
-# with open("spelare.txt", "r") as f: #r for read, f is an optional name
-#     for line in f:
-#         #lista.append(line.replace("\n",""))
-#         pass
+# #FILES DEMO
+# #Read mode
+# # with open("spelare.txt", "r") as f: #r for read, f is an optional name
+# #     for line in f:
+# #         #lista.append(line.replace("\n",""))
+# #         pass
 
-# #Write mode
-# with open('spelare.txt', "w") as f:
-#     #for namn in lista:
-#     #    f.write(namn + "\n")
-#     pass
+# # #Write mode
+# # with open('spelare.txt', "w") as f:
+# #     #for namn in lista:
+# #     #    f.write(namn + "\n")
+# #     pass
 
-#INTRO TO OBJECT ORIENTATION
-#Spelare ska ha namn, JerseyNr och Team name
-from dataclasses import dataclass
+# #INTRO TO OBJECT ORIENTATION
+# #Spelare ska ha namn, JerseyNr och Team name
+# from dataclasses import dataclass
 
-import jsonpickle
+# import jsonpickle
 
-@dataclass
-class Player:
-    Namn: str
-    JerseyNumber: int
-    Teamname: str
+# @dataclass
+# class Player:
+#     Namn: str
+#     JerseyNumber: int
+#     Teamname: str
 
-# p2 = Player("Mats Sundin", 13, "Toronto")
-# p2.Teamname
-# l = []
-# l.append(p1)
-# .Teamname = "Tre Kronor"
-# print(p1.Namn)
-# print(p2.Namn)
+# # p2 = Player("Mats Sundin", 13, "Toronto")
+# # p2.Teamname
+# # l = []
+# # l.append(p1)
+# # .Teamname = "Tre Kronor"
+# # print(p1.Namn)
+# # print(p2.Namn)
 
 
-def GetIntMenuInput(prompt, minValue, maxValue):
-    while True:
-        try:
-            sel = int(input(prompt))
-            if sel < minValue or sel > maxValue:
-                print(f"Mata in ett tal mellan {minValue} och {maxValue} tack")
-            else:
-                break
-        except:
-            print("Mata in ett tal tack")
-    return sel
+# def GetIntMenuInput(prompt, minValue, maxValue):
+#     while True:
+#         try:
+#             sel = int(input(prompt))
+#             if sel < minValue or sel > maxValue:
+#                 print(f"Mata in ett tal mellan {minValue} och {maxValue} tack")
+#             else:
+#                 break
+#         except:
+#             print("Mata in ett tal tack")
+#     return sel
 
-def CreatePlayer(): # black box - kommer ut ut den så ska vi ha en ny player (namn - string)
-    namn = input("Ange namn:")
-    team = input("Ange lag:")
-    jersey = int(input("Ange jersey:"))
-    player = Player(namn,jersey,team) 
-    return player
+# def CreatePlayer(): # black box - kommer ut ut den så ska vi ha en ny player (namn - string)
+#     namn = input("Ange namn:")
+#     team = input("Ange lag:")
+#     jersey = int(input("Ange jersey:"))
+#     player = Player(namn,jersey,team) 
+#     return player
     
-def ListPlayers(listOfPlayers): 
-    for player in listOfPlayers:
-        print(f"{player.JerseyNumber} {player.Namn} {player.Teamname}")
+# def ListPlayers(listOfPlayers): 
+#     for player in listOfPlayers:
+#         print(f"{player.JerseyNumber} {player.Namn} {player.Teamname}")
 
-def DeletePlayer(listOfPlayer):
-    index = 1
-    for playerName in listOfPlayer:
-        print(f"{index} {playerName}")
-        index = index + 1
-    sel = GetIntMenuInput("Ange spelare att ta bort:",1, len(listOfPlayer))
-    del listOfPlayer[sel-1]
+# def DeletePlayer(listOfPlayer):
+#     index = 1
+#     for playerName in listOfPlayer:
+#         print(f"{index} {playerName}")
+#         index = index + 1
+#     sel = GetIntMenuInput("Ange spelare att ta bort:",1, len(listOfPlayer))
+#     del listOfPlayer[sel-1]
 
-def ChangePlayer(listOfPlayer):
-    while True:
-        print(" *** PLAYER MENU *** ")
-        print("1. Ändra namn")
-        print("2. Ändra jersey")
-        print("3. Tillbaka till huvudmenyn")
-        sel = GetIntMenuInput("Ange val:", 1, 3)
-        if sel == 1:
-            index = 1
-            for playerName in listOfPlayer:
-                print(f"{index} {playerName}")
-                index = index + 1
-            sel = GetIntMenuInput("Ange spelare att ändra namn på:",1, len(listOfPlayer))
+# def ChangePlayer(listOfPlayer):
+#     while True:
+#         print(" *** PLAYER MENU *** ")
+#         print("1. Ändra namn")
+#         print("2. Ändra jersey")
+#         print("3. Tillbaka till huvudmenyn")
+#         sel = GetIntMenuInput("Ange val:", 1, 3)
+#         if sel == 1:
+#             index = 1
+#             for playerName in listOfPlayer:
+#                 print(f"{index} {playerName}")
+#                 index = index + 1
+#             sel = GetIntMenuInput("Ange spelare att ändra namn på:",1, len(listOfPlayer))
 
-            namn = input("Ange nytt namn")
-            listOfPlayer[sel-1] = namn
-        elif sel == 2:
-            print("To be implemented")
-        elif sel == 3:
-            return          
+#             namn = input("Ange nytt namn")
+#             listOfPlayer[sel-1] = namn
+#         elif sel == 2:
+#             print("To be implemented")
+#         elif sel == 3:
+#             return          
 
-def MenuPrint():
-    print("1. Skapa spelare")
-    print("2. Lista spelare")
-    print("3. Ändra spelare")
-    print("4. Ta bort spelare")
-    print("5. Avsluta")
-# ibland så returnerar INTE en funktion nånting
+# def MenuPrint():
+#     print("1. Skapa spelare")
+#     print("2. Lista spelare")
+#     print("3. Ändra spelare")
+#     print("4. Ta bort spelare")
+#     print("5. Avsluta")
+# # ibland så returnerar INTE en funktion nånting
 
-def AddTwoNumbers(tal1:int, tal2:int) -> int:
-    return tal1 + tal2
+# def AddTwoNumbers(tal1:int, tal2:int) -> int:
+#     return tal1 + tal2
 
-with open("spelare-objekt.txt", "r") as filen:
-    lista = jsonpickle.decode(filen.read())
+# with open("spelare-objekt.txt", "r") as filen:
+#     lista = jsonpickle.decode(filen.read())
 
-def HuvudMenyInput(lista):        
-    while True:
-        MenuPrint()
-        sel = GetIntMenuInput("Ange val:", 1, 5)
-        if sel == 1:
-            player = CreatePlayer()
-            lista.append(player)
-        if sel == 2:
-            ListPlayers(lista)
-        if sel == 4:
-            DeletePlayer(lista)
-        if sel == 3:
-            ChangePlayer(lista)
-        if sel == 5:
-            break
+# def HuvudMenyInput(lista):        
+#     while True:
+#         MenuPrint()
+#         sel = GetIntMenuInput("Ange val:", 1, 5)
+#         if sel == 1:
+#             player = CreatePlayer()
+#             lista.append(player)
+#         if sel == 2:
+#             ListPlayers(lista)
+#         if sel == 4:
+#             DeletePlayer(lista)
+#         if sel == 3:
+#             ChangePlayer(lista)
+#         if sel == 5:
+#             break
 
-lista = []
-HuvudMenyInput(lista)
+# lista = []
+# HuvudMenyInput(lista)
 
-with open("spelare-objekt.txt", "w") as f:
-    f.write(jsonpickle.encode(lista))
+# with open("spelare-objekt.txt", "w") as f:
+#     f.write(jsonpickle.encode(lista))
+
+
+#MONEY LAUNDRY
+#We get files from Bakomat on format WITHDRAWALxxxx.txt and DEPOSITxxxx.txt
+#Look for suspicious money laundring transactions
+
+import os
+path = "c:\\transactions" #We don't repeat ourselves and if the locations is changed we only change here
+#Loop all files in PATH
+#If deposit, print DEPOSIT
+#If withdrawal, print WITHDRAWAL
+listOfFileNames = os.listdir(path)
+depCount = 0
+witCount = 0
+for fileName in listOfFileNames:
+    if fileName.lower().startswith('deposit'):
+        print("DEPOSIT")
+        depCount += 1
+    elif fileName.lower().startswith('withdrawal'):
+        print("WITHDRAWAL")
+        witCount += 1
+    os.remove(path + "\\" + fileName)
+
+print(f"Antal deposits: {depCount} Antal withdrawals: {witCount}")
+
+print("\n***LOOK FOR FILES***")
+import os
+
+def searchInDir(filesList:list[str], searchterm: str) -> list[str]:
+    result = []
+    for fileName in filesList:
+        if fileName.find(searchterm) != -1:
+            result.append(fileName)
+    return result
+
+while True:
+    try:
+        path = input("Ange path ->.")
+        listOfFileNames = os.listdir(path)
+        searching = input("Ange del av filnamn ->.")
+        relevantFiles = searchInDir(listOfFileNames, searching)
+        for file in relevantFiles:
+            info = os.stat(path + "\\" + file)
+            bytesize = info[6]
+            print(f"{file} - bytes = {bytesize}")
+    except:
+        print("Invalid input. Try again")
+
+#FUNCTIONS #2
+def getAllOlympicGameYears(startYear:int, endYear:int = 2022) -> list[int]: #SINGLE SOURCE OF TRUTH
+    years = []
+    for x in range(startYear,endYear+1,4):
+        years.append(x)
+    return years
+
+start = int(input("Start year: "))
+end = int(input("End year: "))
+ol = getAllOlympicGameYears(start, end)
+for year in ol:
+    print(year)

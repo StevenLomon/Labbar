@@ -28,7 +28,7 @@ def convertToDatetime(date: str) -> datetime: #from format yyyy-mm-dd (Can we ad
     convDate = datetime(year, mon, day)
     return convDate
 
-def getDate(prompt = "Enter a date on the format yyyy-mm-dd, or 'today' for today's date: ") -> str:
+def getDate(prompt:str = "Enter a date on the format yyyy-mm-dd, or 'today' for today's date: ") -> str:
     while True:
         try:
             date = input(prompt)
